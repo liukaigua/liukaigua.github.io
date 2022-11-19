@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/19/Android/%E4%B8%BA%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0C%E6%88%96C++%E4%B8%89%E6%96%B9%E5%BA%93/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/19/%E4%B8%BA%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0C%E6%88%96C++%E4%B8%89%E6%96%B9%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/zhima.jpg">
@@ -176,7 +176,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/11/19/Android/%E4%B8%BA%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0C%E6%88%96C++%E4%B8%89%E6%96%B9%E5%BA%93/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2022/11/19/%E4%B8%BA%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0C%E6%88%96C++%E4%B8%89%E6%96%B9%E5%BA%93/" class="post-title-link" itemprop="url">为项目添加C或C++三方库</a>
         </h2>
 
         <div class="post-meta">
@@ -187,7 +187,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-11-19 21:08:02 / 修改时间：21:07:55" itemprop="dateCreated datePublished" datetime="2022-11-19T21:08:02+08:00">2022-11-19</time>
+              <time title="创建时间：2022-11-19 21:12:39 / 修改时间：21:14:08" itemprop="dateCreated datePublished" datetime="2022-11-19T21:12:39+08:00">2022-11-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a>
+                </span>
             </span>
 
           
@@ -206,19 +215,14 @@
 <p>第二步：配置 CMake 以将三方库引入项目；</p>
 <p>第三步：配置 Gradle 以关联 CMakeLists.txt 脚本。</p>
 <p>参考链接：<a target="_blank" rel="noopener" href="https://developer.android.com/studio/projects/add-native-code?hl=zh-cn">向您的项目添加 C 和 C++ 代码</a></p>
-<h1 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h1><p>第一步：创建一个 Native C++ 模板项目。</p>
-<p>第二步：将包含 C&#x2F;C++ 头文件的文件夹放到 main&#x2F;cpp 目录，本例文件夹名为 XXXSdkInc。</p>
-<p>第三步：在 main 下新建文件夹，并将需要编译的平台的库放到其中，本例文件夹名为 jniLibs。最终的目录结构如下。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">main</span><br><span class="line">  |----cpp</span><br><span class="line">  |    |----XXXSdkInc               # C/C++ 头文件目录</span><br><span class="line">  |    |----CMakeLists.txt          </span><br><span class="line">  |    |----native-lib.cpp          </span><br><span class="line">  |----java</span><br><span class="line">  |    |----com/example/myapplication</span><br><span class="line">  |    |    |----MainActivity.java</span><br><span class="line">  |----jniLibs</span><br><span class="line">  |    |----arm64-v8a</span><br><span class="line">  |    |    |----libXXX.so          # arm64 平台库</span><br><span class="line">  |    |----armeabi-v7a</span><br><span class="line">  |    |    |----libXXX.so          # armv7 平台库</span><br><span class="line">  |----res                          </span><br><span class="line">  |----AndroidManifest.xml</span><br></pre></td></tr></table></figure>
-
-<p>第四步：配置 CMakeLists.txt，参考如下配置。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"># Sets the minimum version of CMake required to build the native library.</span><br><span class="line">cmake_minimum_required(VERSION 3.10.2)</span><br><span class="line"></span><br><span class="line"># Declares and names the project.</span><br><span class="line">project(&quot;myapplication&quot;)</span><br><span class="line"></span><br><span class="line"># Creates and names a library</span><br><span class="line">add_library( </span><br><span class="line">             native-lib</span><br><span class="line">             SHARED</span><br><span class="line">             native-lib.cpp </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 将 C/C++ 头文件关联到 native-lib</span><br><span class="line">target_include_directories(</span><br><span class="line">        native-lib</span><br><span class="line">        PRIVATE</span><br><span class="line">        F:/xxx/MyApplication/app/src/main/cpp/XXXSdkInc </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># 添加三方库，类型是 STATIC(静态库)/SHARED(动态库)/MODULE(模块库) 之一</span><br><span class="line">add_library(XXXLib SHARED IMPORTED)</span><br><span class="line"></span><br><span class="line"># 指定三方库的路径</span><br><span class="line">set_target_properties(</span><br><span class="line">        XXXLib</span><br><span class="line">        PROPERTIES IMPORTED_LOCATION</span><br><span class="line">        F:/xxx/MyApplication/app/src/main/jniLibs/$&#123;CMAKE_ANDROID_ARCH_ABI&#125;/libXXX.so</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># Searches for a specified prebuilt library and stores the path as a variable.</span><br><span class="line">find_library(</span><br><span class="line">              log-lib</span><br><span class="line">              log </span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"># Specifies libraries CMake should link to your target library</span><br><span class="line">target_link_libraries( </span><br><span class="line">                       native-lib</span><br><span class="line"></span><br><span class="line">                       # 将 XXXLib 链接到目标库 native-lib</span><br><span class="line">                       XXXLib  </span><br><span class="line"></span><br><span class="line">                       $&#123;log-lib&#125;</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>第五步：配置 App 的 build.gradle。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        # 设置目标平台架构（注意：必须包含 64-bit 版本）</span><br><span class="line">        externalNativeBuild &#123;</span><br><span class="line">            cmake &#123;</span><br><span class="line">                cppFlags &#x27;-std=c++11&#x27;</span><br><span class="line">                abiFilters &quot;armeabi-v7a&quot;, &quot;arm64-v8a&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # 设置 CMakeLists.txt 路径</span><br><span class="line">    externalNativeBuild &#123;</span><br><span class="line">        cmake &#123;</span><br><span class="line">            path file(&#x27;src/main/cpp/CMakeLists.txt&#x27;)</span><br><span class="line">            version &#x27;3.10.2&#x27;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>第五步：在模板自带的 native-lib.cpp 中引入并使用三方库。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/19/%E4%B8%BA%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0C%E6%88%96C++%E4%B8%89%E6%96%B9%E5%BA%93/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -449,6 +453,12 @@
           <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
 </div>
